@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_inas_model_InasStation" items="${inasstations}" z="dzsE9km20/Yx3lMwgmpuH+MgOrs=">
+        <table:table data="${inasstations}" id="l_com_inas_model_InasStation" path="/inasstations" z="aoSS5WfAmJxRl5ohccotnCmNhFo=">
+            <table:column id="c_com_inas_model_InasStation_name" property="name" z="GjzYvg67Mkouy56mQFCJJvexW4Q="/>
+            <table:column id="c_com_inas_model_InasStation_type" property="type" z="Izk7Vochqq5p2laTxWLjMA5/Lrw="/>
+            <table:column id="c_com_inas_model_InasStation_description" property="description" z="pepP/Nex0m6nl9tkA81WVghfiiw="/>
+        </table:table>
+    </page:list>
+</div>

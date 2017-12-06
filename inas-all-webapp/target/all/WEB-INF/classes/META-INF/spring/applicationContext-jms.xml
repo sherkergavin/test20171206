@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-stream="http://www.springframework.org/schema/integration/stream"
+       xmlns:int-jms="http://www.springframework.org/schema/integration/jms"
+       xmlns:ctx="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+		http://www.springframework.org/schema/integration/stream http://www.springframework.org/schema/integration/stream/spring-integration-stream.xsd
+		http://www.springframework.org/schema/integration/jms http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <import resource="classpath*:applicationContext-message.xml" />
+
+    <!--server-->
+    <int:channel id="messageOut"/>
+    <int-jms:outbound-channel-adapter id="toJMS" channel="messageOut" destination="messageQueue"/>
+    <bean id="messageQueue" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg value="queue.message"/>
+    </bean>
+    <int:poller id="poller" default="true" fixed-delay="1000"/>
+
+    <!--client-->
+    <ctx:component-scan base-package="com.inas.message"/>
+    <int:service-activator input-channel="messageIn" ref="simpleMessageReceiver"/>
+    <int-jms:inbound-gateway id="fromJMS" request-destination="messageQueue" request-channel="messageIn"/>
+    <int:channel id="messageIn"/>
+</beans>

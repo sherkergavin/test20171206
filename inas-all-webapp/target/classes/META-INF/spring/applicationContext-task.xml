@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+    <!-- Timer -->
+    <bean id="navSchedulerFactory" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="quartzProperties">
+            <props>
+                <prop key="org.quartz.threadPool.class">org.quartz.simpl.SimpleThreadPool</prop>
+                <prop key="org.quartz.threadPool.threadCount">10</prop>
+            </props>
+        </property>
+        <property name="waitForJobsToCompleteOnShutdown" value="true"/>
+        <property name="triggers">
+            <list>
+                <!--<ref local="pumpStartStopStatisticsTrigger"/>-->
+                <!--<ref local="pumpStartStopPressureStatisticsTrigger"/>-->
+            </list>
+        </property>
+    </bean>
+
+    <bean id="pumpStartStopStatisticsTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="statisticsTrackerTask"/>
+        <property name="cronExpression" value="0 0/3 * * * ?"/>
+    </bean>
+
+    <bean id="statisticsTrackerTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="middleService"/>
+        <property name="targetMethod" value="moveToMiddle"/>
+        <property name="concurrent" value="false"/>
+    </bean>
+
+    <bean id="dataTracker" class="com.inas.service.data.impl.MiddleServiceImpl"/>
+
+    <bean id="pumpStartStopPressureStatisticsTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="pumpStartStopPressureStatisticsTask"/>
+        <property name="cronExpression" value="0 0/1 * * * ?"/>
+    </bean>
+
+    <bean id="pumpStartStopPressureStatisticsTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="pumpStartStopPressureStatisticsImpl"/>
+        <property name="targetMethod" value="pressureStatistics"/>
+        <property name="concurrent" value="false"/>
+    </bean>
+
+    <bean id="pumpStartStopPressureStatisticsImpl" class="com.inas.service.task.impl.PumpStartStopPressureStatisticsImpl"/>
+
+</beans>

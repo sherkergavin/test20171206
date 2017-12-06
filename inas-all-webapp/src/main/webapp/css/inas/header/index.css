@@ -1,0 +1,210 @@
+a {
+    color: #ffffff;
+    font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
+    text-decoration: none;
+}
+
+.headerbd {
+    margin: 0;
+    padding: 0;
+}
+
+#headerDiv img {
+    border-width: 0;
+    margin: 0;
+    padding: 0;
+}
+
+#headerDiv a {
+    text-decoration: none;
+}
+
+.headerbg {
+    margin: 0;
+    background-image: url(../../../images/inas/header/bg-t.jpg);
+    height: 55px;
+}
+
+.headergn {
+    position: relative;
+    margin-top: -55px;
+    margin-left: auto;
+    margin-right: 0;
+    height: 55px;
+    font-size: 12px;
+}
+
+.headergn a img {
+    margin-left: 11px;
+    border: none;
+}
+
+.headergn p {
+    position: absolute;
+    margin: 0 0 0 5px;
+}
+
+.ul2 {
+    width: auto;
+    float: right;
+    margin-top: 3px;
+    margin-right: 20px;
+}
+
+.ul2 li {
+    height: 49px;
+    list-style: none;
+    float: right;
+    margin-left: 20px;
+    border-radius: 3px;
+}
+
+.ul2 li a {
+    display: block;
+}
+
+.ul2 .headergn1 a:hover {
+    background: #015692;
+}
+
+.ul2 .headergn1 a {
+    display: block;
+    width: 59px;
+    height: 48px;
+    border-radius: 3px;
+}
+
+.ul2 .headergn2 a:hover {
+    background: #015692;
+}
+
+.ul2 .headergn2 a {
+    display: block;
+    width: 59px;
+    height: 48px;
+    border-radius: 3px;
+}
+
+.ul2 .headergn3 a:hover {
+    background: #015692;
+}
+
+.ul2 .headergn3 a {
+    display: block;
+    width: 59px;
+    height: 48px;
+    border-radius: 3px;
+}
+
+.ul2 .headergn4 a:hover {
+    background: #015692;
+}
+
+.ul2 .headergn4 a {
+    display: block;
+    width: 59px;
+    height: 48px;
+    border-radius: 3px;
+}
+
+.ul2 .headergn5 a:hover {
+    background: #015692;
+}
+
+.ul2 .headergn5 a {
+    display: block;
+    width: 59px;
+    height: 48px;
+    border-radius: 3px;
+}
+
+.ul2 .headergn6 a:hover {
+    background: #015692;
+}
+
+.ul2 .headergn6 a {
+    display: block;
+    width: 59px;
+    height: 48px;
+    border-radius: 3px;
+}
+
+.ul2 .headergn7 a:hover {
+    background: #015692;
+}
+
+.ul2 .headergn7 a {
+    display: block;
+    width: 59px;
+    height: 48px;
+    border-radius: 3px;
+}
+
+.ul2 .headergn8 a:hover {
+    background: #015692;
+}
+
+.ul2 .headergn8 a {
+    display: block;
+    width: 59px;
+    height: 48px;
+    border-radius: 3px;
+}
+
+.xian {
+    width: 1px;
+    height: 55px;
+    background: url(../../../images/inas/header/xian.png) no-repeat;
+}
+
+.headerbt1 a {
+    width: 38px;
+    height: 48px;
+    background: url(../../../images/inas/header/peizhi2.png) no-repeat;
+
+}
+
+.headerbt1 a:hover {
+    background: url(../../../images/inas/header/peizhi1.png) no-repeat;
+}
+
+.headerbt2 a {
+    width: 38px;
+    height: 48px;
+    background: url(../../../images/inas/header/help2.png) no-repeat;
+}
+
+.headerbt2 a:hover {
+    background: url(../../../images/inas/header/help1.png) no-repeat;
+}
+
+.headerbt3 a {
+    width: 38px;
+    height: 48px;
+    background: url(../../../images/inas/header/out2.png) no-repeat;
+}
+
+.headerbt3 a:hover {
+    background: url(../../../images/inas/header/out1.png) no-repeat;
+}
+
+.headerbbg {
+    /*position: absolute;*/
+    margin-top: -55px;
+    width: 892px;/*700,892*/
+    height: 55px;
+    background: url(../../../images/inas/header/banner.png) no-repeat;
+}
+
+.runModule {
+    position: relative;
+    background: #015692;
+    /*cursor: default;*/
+    cursor:pointer;
+}
+
+.row-switch .x-grid-cell-inner {
+    padding: 5px 0px 4px;
+    text-overflow: ellipsis;
+}
+

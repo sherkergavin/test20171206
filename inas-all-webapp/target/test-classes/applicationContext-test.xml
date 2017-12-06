@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:ctx="http://www.springframework.org/schema/context"
+       xmlns:int-stream="http://www.springframework.org/schema/integration/stream"
+       xmlns:int-jms="http://www.springframework.org/schema/integration/jms"
+       xmlns:context="http://www.springframework.org/schema/data/repository"
+       xsi:schemaLocation="
+       	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+		http://www.springframework.org/schema/integration/stream http://www.springframework.org/schema/integration/stream/spring-integration-stream.xsd
+		http://www.springframework.org/schema/integration/jms http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd">
+
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath*:META-INF/spring/*.properties</value>
+                <value>classpath*:*.properties</value>
+            </list>
+        </property>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="fileEncoding" value="utf-8"/>
+    </bean>
+
+    <ctx:component-scan base-package="com.inas.web">
+        <ctx:exclude-filter expression=".*_Roo_.*" type="regex"/>
+        <ctx:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
+    </ctx:component-scan>
+
+    <bean id="httpClientFactory" class="org.springframework.http.client.SimpleClientHttpRequestFactory">
+        <property name="connectTimeout" value="10000"/>
+        <property name="readTimeout" value="10000"/>
+    </bean>
+
+    <bean id="activiRESTProxy" class="com.inas.workflow.ActivitiRESTProxy">
+        <property name="actRestServiceURI" value="${workflow.service.url}"/>
+        <property name="restTemplate" ref="restTemplate"/>
+    </bean>
+
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+        <constructor-arg ref="httpClientFactory" />
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.FormHttpMessageConverter" />
+                <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                    <constructor-arg value="UTF-8" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+</beans>

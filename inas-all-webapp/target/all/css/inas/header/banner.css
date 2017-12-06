@@ -1,0 +1,42 @@
+.headerbd{
+    margin:0;
+    padding:0;
+}
+#headerDiv img{
+    border-width:0;
+    margin:0;
+    padding:0;
+}
+
+#headerDiv a{
+    text-decoration:none;
+}
+
+.headerbg{
+    margin:0px;
+    background-image:url(../../../images/inas/header/bg-t.jpg);
+    height:55px;
+}
+
+.headergn{
+    position:relative;
+    margin-top:-55px;
+    margin-left:auto;
+    margin-right:0px;
+    height:55px;
+    width:250px;
+}
+
+.headerbt{
+    margin:0;
+    list-style-type:none;
+}
+
+
+.headerbbg{
+    position:absolute;
+    margin-top:-55px;
+    width:730px;
+    height:55px;
+    background-image:url(../../../images/inas/header/banner.png);
+}

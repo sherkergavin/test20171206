@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:sec="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <sec:http pattern="/**/*.jpg" security="none"/>
+    <sec:http pattern="/**/*.png" security="none"/>
+    <sec:http pattern="/**/*.gif" security="none"/>
+    <sec:http pattern="/**/*.css" security="none"/>
+    <sec:http pattern="/**/*.js" security="none"/>
+    <!--
+         <sec:http pattern="/j_spring_cas_security_check*" security="none" />
+    -->
+    <sec:http entry-point-ref="casEntryPoint" access-decision-manager-ref="accessDecisionManager"
+              access-denied-page="${cas.deniedUrl}" auto-config="false">
+        <sec:intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY"/>
+
+        <sec:session-management>
+            <sec:concurrency-control max-sessions="1"
+                                     expired-url="${cas.sessionExpiredUrl}" error-if-maximum-exceeded="false"/>
+        </sec:session-management>
+
+        <sec:custom-filter position="CAS_FILTER" ref="casFilter"/>
+        <sec:custom-filter ref="requestSingleLogoutFilter" before="LOGOUT_FILTER"/>
+        <sec:custom-filter ref="singleLogoutFilter" before="CAS_FILTER"/>
+    </sec:http>
+
+    <!-- cas 认证过滤器 -->
+    <bean id="casFilter"
+          class="org.springframework.security.cas.web.CasAuthenticationFilter">
+        <property name="authenticationManager" ref="authenticationManager"/>
+
+        <property name="authenticationFailureHandler"
+                  ref="authenticationFailureHandler"/>
+        <property name="authenticationSuccessHandler"
+                  ref="authenticationSuccessHandler"/>
+
+        <property name="filterProcessesUrl" value="/casClient/j_spring_cas_security_check"/>
+
+
+    </bean>
+    <!-- cas 认证失败控制器 -->
+    <bean id="authenticationFailureHandler"
+          class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+        <property name="defaultFailureUrl" value="${cas.authFailTargetUrl}"/>
+    </bean>
+    <!-- cas 认证成功控制器 -->
+    <bean id="authenticationSuccessHandler"
+          class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">
+        <property name="alwaysUseDefaultTargetUrl" value="true"/>
+        <property name="defaultTargetUrl" value="${cas.authSuccessTargetUrl}"/>
+    </bean>
+
+    <!-- 注销客户端 -->
+    <bean id="singleLogoutFilter"
+          class="org.jasig.cas.client.session.SingleSignOutFilter"/>
+
+    <!-- 注销服务器端 -->
+    <bean id="requestSingleLogoutFilter"
+          class="org.springframework.security.web.authentication.logout.LogoutFilter">
+        <constructor-arg
+                value="${cas.protocol}://${cas.server.host}/cas/logout"/>
+        <constructor-arg>
+            <bean
+                    class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"/>
+        </constructor-arg>
+        <property name="filterProcessesUrl" value="/casClient/j_spring_cas_security_logout"/>
+    </bean>
+
+
+    <!-- 登录成功后的返回地址 -->
+    <bean id="serviceProperties"
+          class="org.springframework.security.cas.ServiceProperties">
+        <property name="service"
+                  value="${cas.protocol}://${cas.service.host}/${cas.appname}/casClient/j_spring_cas_security_check"/>
+        <property name="sendRenew" value="false"/>
+    </bean>
+
+    <!-- CAS认证切入点，声明cas服务器端登录的地址 -->
+    <bean id="casEntryPoint"
+          class="org.springframework.security.cas.web.CasAuthenticationEntryPoint">
+        <property name="loginUrl"
+                  value="${cas.protocol}://${cas.server.host}/cas/login"/>
+        <property name="serviceProperties" ref="serviceProperties"/>
+    </bean>
+
+    <!-- cas认证提供器，定义客户端的验证方式 -->
+    <bean id="casAuthenticationProvider"
+          class="org.springframework.security.cas.authentication.CasAuthenticationProvider">
+        <!-- 客户端只验证用户名是否合法 -->
+        <property name="authenticationUserDetailsService" ref="authenticationUserDetailsService">
+
+        </property>
+
+        <property name="serviceProperties" ref="serviceProperties"/>
+        <property name="ticketValidator">
+            <bean class="org.jasig.cas.client.validation.Cas20ServiceTicketValidator">
+                <constructor-arg index="0" value="${cas.protocol}://${cas.server.host}/cas"/>
+            </bean>
+        </property>
+        <property name="key" value="an_id_for_this_auth_provider_only"/>
+    </bean>
+
+    <bean id="authenticationUserDetailsService"
+          class="org.springframework.security.cas.userdetails.GrantedAuthorityFromAssertionAttributesUserDetailsService">
+        <constructor-arg>
+            <array>
+                <value>authorities</value>
+            </array>
+        </constructor-arg>
+    </bean>
+
+    <!-- 在认证管理器中注册cas认证提供器 -->
+    <sec:authentication-manager alias="authenticationManager">
+        <sec:authentication-provider ref="casAuthenticationProvider"/>
+    </sec:authentication-manager>
+
+
+    <!-- 事件日志 -->
+    <bean id="loggerListener"
+          class="org.springframework.security.authentication.event.LoggerListener"/>
+
+    <!-- 获取客户端用户 -->
+    <!--
+        <bean id="userService" class="com.inas.common.security.UserService" />
+    -->
+
+    <!-- 认证拦截器，用于客户端权限验证 -->
+    <bean id="accessDecisionManager"
+          class="org.springframework.security.access.vote.AffirmativeBased">
+        <property name="decisionVoters">
+            <list>
+                <!-- <bean class="cas.client.DynamicRoleVoter" />  -->
+                <bean class="org.springframework.security.access.vote.RoleVoter"/>
+                <bean class="org.springframework.security.access.vote.AuthenticatedVoter"/>
+            </list>
+        </property>
+    </bean>
+
+    <context:property-placeholder system-properties-mode="OVERRIDE" properties-ref="environment"/>
+    <util:properties id="environment">
+        <prop key="cas.protocol">http</prop>
+        <prop key="cas.appname">all</prop>
+        <prop key="cas.service.host">jm:8080</prop>
+        <prop key="cas.server.host">jm:8080</prop>
+        <prop key="cas.authSuccessTargetUrl">/module-jsp/app/index.jsp</prop>
+        <prop key="cas.authFailTargetUrl">/fail.jsp</prop>
+        <prop key="cas.deniedUrl">/denied.jsp</prop>
+        <prop key="cas.sessionExpiredUrl">/expired.jsp</prop>
+    </util:properties>
+</beans>

@@ -1,0 +1,50 @@
+@CHARSET "UTF-8";
+
+/* 新增 */
+.add {
+    background-image: url(images/add.png) !important
+}
+/* 编辑 */
+.edit {
+    background-image: url(images/edit.png) !important
+}
+/* 删除 */
+.delete {
+    background-image: url(images/delete.png) !important
+}
+/* 查询 */
+.search {
+    background-image: url(images/search.png) !important
+}
+/* 保存 */
+.save {
+    background-image: url(images/save.png) !important
+}
+/* 刷新 */
+.refresh {
+    background-image: url(images/refresh.png) !important
+}
+/* 打印 */
+.print {
+    background-image: url(images/print.png) !important
+}
+/* 提交 */
+.submit {
+    background-image: url(images/submit.png) !important
+}
+/* 重置*/
+.reset {
+    background-image: url(images/reset.png) !important;
+}
+/* 查找*/
+.find {
+    background-image: url(images/find.png) !important;
+}
+/* 查找*/
+.config {
+    background-image: url(images/config.png) !important;
+}
+/* 关闭*/
+.close {
+    background-image: url(images/close.png) !important;
+}

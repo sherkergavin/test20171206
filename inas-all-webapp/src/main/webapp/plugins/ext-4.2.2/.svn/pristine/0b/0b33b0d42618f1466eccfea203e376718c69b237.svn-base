@@ -1,0 +1,170 @@
+@CHARSET "UTF-8";
+
+/*二级图标*/
+.alarmconf{
+    background-image: url(images/module-icons/second-icons/alarmconf.png) !important
+}
+.alarmshow{
+    background-image: url(images/module-icons/second-icons/alarmshow.png) !important
+}
+.dataconf{
+    background-image: url(images/module-icons/second-icons/dataconf.png) !important
+}
+.datashow{
+    background-image: url(images/module-icons/second-icons/datashow.png) !important
+}
+.dispathmanage{
+    background-image: url(images/module-icons/second-icons/dispathmanage.png) !important
+}
+.logmanage{
+    background-image: url(images/module-icons/second-icons/logmanage.png) !important
+}
+.officeauto{
+    background-image: url(images/module-icons/second-icons/officeauto.png) !important
+}
+.staticsouceconf{
+    background-image: url(images/module-icons/second-icons/staticsouceconf.png) !important
+}
+.usermanage{
+    background-image: url(images/module-icons/second-icons/usermanage.png) !important
+}
+.wfexchange{
+    background-image: url(images/module-icons/second-icons/wfexchange.png) !important
+}
+
+
+/*三级图标*/
+.alarmlive{
+    background-image: url(images/module-icons/third-icons/alarmlive.png) !important
+}
+.alarmpolicy{
+    background-image: url(images/module-icons/third-icons/alarmpolicy.png) !important
+}
+.alarmquery{
+    background-image: url(images/module-icons/third-icons/alarmquery.png) !important
+}
+.areaconf{
+    background-image: url(images/module-icons/third-icons/areaconf.png) !important
+}
+.authorityconf{
+    background-image: url(images/module-icons/third-icons/authorityconf.png) !important
+}
+.datacollectconf{
+    background-image: url(images/module-icons/third-icons/datacollectconf.png) !important
+}
+.dataLive{
+    background-image: url(images/module-icons/third-icons/dataLive.png) !important
+}
+.dataQuery{
+    background-image: url(images/module-icons/third-icons/dataQuery.png) !important
+}
+.datashowconf{
+    background-image: url(images/module-icons/third-icons/datashowconf.png) !important
+}
+.dataversionconf{
+    background-image: url(images/module-icons/third-icons/dataversionconf.png) !important
+}
+.displogop{
+    background-image: url(images/module-icons/third-icons/displogop.png) !important
+}
+.displogquery{
+    background-image: url(images/module-icons/third-icons/displogquery.png) !important
+}
+.equipexchange{
+    background-image: url(images/module-icons/third-icons/equipexchange.png) !important
+}
+.instruop{
+     background-image: url(images/module-icons/third-icons/instruop.png) !important
+ }
+.lineconf{
+    background-image: url(images/module-icons/third-icons/lineconf.png) !important
+}
+.makeplan{
+    background-image: url(images/module-icons/third-icons/makeplan.png) !important
+}
+.mettingrec{
+    background-image: url(images/module-icons/third-icons/mettingrec.png) !important
+}
+.SMS{
+    background-image: url(images/module-icons/third-icons/SMS.png) !important
+}
+.oplog{
+    background-image: url(images/module-icons/third-icons/oplog.png) !important
+}
+.pipeexchange{
+    background-image: url(images/module-icons/third-icons/pipeexchange.png) !important
+}
+.runmonitor{
+    background-image: url(images/module-icons/third-icons/runmonitor.png) !important
+}
+.shiftmanage{
+    background-image: url(images/module-icons/third-icons/shiftmanage.png) !important
+}
+.shiftquery{
+    background-image: url(images/module-icons/third-icons/shiftquery.png) !important
+}
+.stationconf{
+    background-image: url(images/module-icons/third-icons/stationconf.png) !important
+}
+.summarize{
+    background-image: url(images/module-icons/third-icons/summarize.png) !important
+}
+.userconf{
+    background-image: url(images/module-icons/third-icons/userconf.png) !important
+}
+.valveexchange{
+    background-image: url(images/module-icons/third-icons/valveexchange.png) !important
+}
+.wfquery{
+    background-image: url(images/module-icons/third-icons/wfquery.png) !important
+}
+.collectTask{
+    background-image: url(images/module-icons/third-icons/collectTask.png) !important
+}
+.dataItem{
+    background-image: url(images/module-icons/third-icons/dataItem.png) !important
+}
+.dataType{
+    background-image: url(images/module-icons/third-icons/dataType.png) !important
+}
+.DBType{
+    background-image: url(images/module-icons/third-icons/DBType.png) !important
+}
+.external{
+    background-image: url(images/module-icons/third-icons/external.png) !important
+}
+.messageGroup{
+    background-image: url(images/module-icons/third-icons/messageGroup.png) !important
+}
+.organization{
+    background-image: url(images/module-icons/third-icons/organization.png) !important
+}
+.stationType{
+    background-image: url(images/module-icons/third-icons/stationType.png) !important
+}
+
+.switch{
+    background-image: url(images/module-icons/third-icons/switch.png) !important
+}
+
+.middle{
+    background-image: url(images/module-icons/third-icons/middle.png) !important
+}
+
+.flushing{
+    background-image: url(images/module-icons/third-icons/flushing.png) !important
+}
+
+.valveoperate{
+    background-image: url(images/module-icons/third-icons/valveoperate.png) !important
+}
+
+.waterbreak{
+    background-image: url(images/module-icons/third-icons/waterbreak.png) !important
+}
+.stopequipment{
+    background-image: url("images/module-icons/third-icons/stopequipment.png")!important
+}
+.report{
+    background-image: url("images/module-icons/third-icons/report.png")!important
+}
