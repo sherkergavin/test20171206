@@ -37,7 +37,6 @@
             <version>${project.version}</version>
         </dependency>
 
-        <!-- General dependencies for standard applications -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
